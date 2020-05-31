@@ -1,10 +1,6 @@
 <?php
 namespace Lucinda\Templating;
 
-require_once("StartTag.php");
-require("StartEndTag.php");
-require("TagExpressionParser.php");
-
 /**
  * Implements operations common to all parsable (non-system) tags. All parsable tag classes must extend it.
  */
@@ -16,7 +12,7 @@ abstract class SystemTag
      * @param string $expression
      * @return boolean
      */
-    protected function isExpression($expression)
+    protected function isExpression(string $expression): bool
     {
         return (strpos($expression, '${')!==false?true:false);
     }
@@ -27,7 +23,7 @@ abstract class SystemTag
      * @param string $expression
      * @return string
      */
-    protected function parseExpression($expression)
+    protected function parseExpression(string $expression): string
     {
         $expressionObject = new TagExpressionParser();
         return $expressionObject->parse($expression);
@@ -40,11 +36,10 @@ abstract class SystemTag
      * @param string[] $requiredParameters
      * @throws ViewException If a required attribute is not found.
      */
-    protected function checkParameters($parameters, $requiredParameters)
+    protected function checkParameters(array $parameters, array $requiredParameters): void
     {
         foreach ($requiredParameters as $name) {
             if (!isset($parameters[$name])) {
-                $tagName = get_class($this);
                 preg_match("/Std(.*)Tag/", get_class($this), $matches);
                 throw new ViewException("Tag '".strtolower($matches[1])."' requires attribute: ".$name);
             }

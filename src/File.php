@@ -13,7 +13,7 @@ class File
      *
      * @param string $name Complete path of file.
      */
-    public function __construct($name)
+    public function __construct(string $name)
     {
         $this->path = $name;
     }
@@ -24,7 +24,7 @@ class File
      * @param string $content
      * @throws ViewException If you are not allowed to write on that file.
      */
-    public function putContents($content)
+    public function putContents(string $content): void
     {
         $folder = substr($this->path, 0, strrpos($this->path, "/"));
         if (!file_exists($folder)) {
@@ -37,7 +37,7 @@ class File
                 }
             }
         }
-        $response = @file_put_contents($this->path, $content);
+        $response = file_put_contents($this->path, $content);
         if (!$response) {
             throw new ViewException("Could not write compilation: ".$this->path);
         }
@@ -49,7 +49,7 @@ class File
      * @throws ViewException If file doesn't exist.
      * @return string
      */
-    public function getContents()
+    public function getContents(): string
     {
         return file_get_contents($this->path);
     }
@@ -59,7 +59,7 @@ class File
      *
      * @return boolean
      */
-    public function exists()
+    public function exists(): bool
     {
         return file_exists($this->path);
     }
@@ -69,7 +69,7 @@ class File
      *
      * @return integer
      */
-    public function getModificationTime()
+    public function getModificationTime(): int
     {
         return filemtime($this->path);
     }

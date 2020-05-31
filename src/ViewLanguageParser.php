@@ -1,12 +1,9 @@
 <?php
 namespace Lucinda\Templating;
 
-require("ViewCompilation.php");
-require("AttributesParser.php");
-require("ExpressionParser.php");
-require("taglib/System/loader.php");
-require("UserTagParser.php");
-require("SystemTagParser.php");
+use Lucinda\Templating\TagLib\System\EscapeTag;
+use Lucinda\Templating\TagLib\System\ImportTag;
+use Lucinda\Templating\TagLib\System\NamespaceTag;
 
 /**
  * Compiles a ViewLanguage template recursively into a PHP file on disk based on:
@@ -30,7 +27,7 @@ class ViewLanguageParser
      * @param string $compilationsFolder Absolute path to compilations folder on disk
      * @param string $tagLibFolder Relative path to user-defined tag libraries folder.
      */
-    public function __construct($templatesFolder, $templatesExtension, $compilationsFolder, $tagLibFolder = "")
+    public function __construct(string $templatesFolder, string $templatesExtension, string $compilationsFolder, string $tagLibFolder = "")
     {
         $this->templatesFolder = $templatesFolder;
         $this->templatesExtension = $templatesExtension;
@@ -42,14 +39,13 @@ class ViewLanguageParser
      * Compiles ViewLanguage instructions in input file/string into PHP, saves global view into a compilation file, then returns location to that file.
      *
      * @param string $templatePath Relative path to template file that needs to be compiled within templates folder (without extension).
-     * @param string $outputStream Response stream contents before view language constructs were parsed.
      * @return string Compilation file name, containing response stream after view language constructs were parsed.
      * @throws ViewException If compilation fails
      */
-    public function compile($templatePath, $outputStream="")
+    public function compile(string $templatePath): string
     {
         // opens existing compilation (if exists)
-        $viewCompilation = new ViewCompilation($this->compilationsFolder, $templatePath, $this->templatesExtension);
+        $viewCompilation = new ViewCompilation($this->compilationsFolder, $templatePath);
         
         // if compilation components haven't changed, do not go further
         if (!$viewCompilation->hasChanged()) {
@@ -57,20 +53,13 @@ class ViewLanguageParser
         }
         
         // instantiate template escaping logic
-        $escapeTag = new SystemEscapeTag();
-
-        // if main template not found, throw exception
-        $baseTemplate = ($this->templatesFolder?$this->templatesFolder."/":"").$templatePath.".".$this->templatesExtension;
-        if (!file_exists($baseTemplate)) {
-            throw new ViewException("Base template not found: ".$baseTemplate);
-        }
+        $escapeTag = new EscapeTag();
         
         // includes dependant tree of templates
-        $importTag = new SystemImportTag($this->templatesFolder, $this->templatesExtension, $viewCompilation);
-        $outputStream = $importTag->parse($templatePath, $escapeTag, $outputStream);
-
-        // run namespace tag parser
-        $namespaceTag = new SystemNamespaceTag($this->tagLibFolder);
+        $importTag = new ImportTag($this->templatesFolder, $this->templatesExtension, $viewCompilation);
+        $outputStream = $importTag->parse($templatePath, $escapeTag);
+        
+        $namespaceTag = new NamespaceTag($this->tagLibFolder);
         $outputStream = $namespaceTag->parse($outputStream);
         
         // run user tag parser

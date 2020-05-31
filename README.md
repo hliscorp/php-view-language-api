@@ -1,7 +1,5 @@
 # View Language API
 
-*Documentation below refers to latest API version, available in branch [v3.0.0](https://github.com/aherne/php-view-language-api/tree/v3.0.0)! For older version in master branch, please check [Lucinda Framework](https://www.lucinda-framework.com/view-language).*
-
 Table of contents:
 
 - [About](#about)
@@ -11,7 +9,7 @@ Table of contents:
 - [Compilation](#compilation)
 - [Installation](#installation)
 - [Unit Tests](#unit-tests)
-- [Examples](#unit-tests)
+- [Examples](#examples)
 - [Reference Guide](#reference-guide)
 
 ## About 
@@ -21,11 +19,12 @@ This API is the PHP compiler for ViewLanguage templating engine, a markup langua
 - interfacing variables through **[expressions](#expressions)**.
 - interfacing logics (control structures, repeating html segments) through **[tags](#tags)**
 
+![diagram](https://www.lucinda-framework.com/view-language-api.svg)
 
 In order to achieve its goals, following steps need to be observed:
 
 - **[configuration](#configuration)**: setting up an XML file where templating is configured
-- **[compilation](#compilation)**: using [Lucinda\Templating\Wrapper](https://github.com/aherne/php-view-language-api/blob/v3.0.0/src/Wrapper.php) to read above XML and compile a template
+- **[compilation](#compilation)**: using [Lucinda\Templating\Wrapper](https://github.com/aherne/php-view-language-api/blob/master/src/Wrapper.php) to read above XML and compile a template
 
 API is fully PSR-4 compliant, only requiring PHP7.1+ interpreter and SimpleXML extension. To quickly see how it works, check:
 
@@ -164,7 +163,7 @@ Example:
 
 ## Compilation
 
-Once you have completed step above, you need to instantiate [Lucinda\Templating\Wrapper](https://github.com/aherne/php-view-language-api/blob/v3.0.0/src/Wrapper.php) in order to be able to compile templates later on:
+Once you have completed step above, you need to instantiate [Lucinda\Templating\Wrapper](https://github.com/aherne/php-view-language-api/blob/master/src/Wrapper.php) in order to be able to compile templates later on:
 
 ```php
 $wrapper = new Lucinda\SQL\Wrapper(simplexml_load_file(XML_FILE_NAME));
@@ -236,9 +235,9 @@ echo $html;
 
 For tests and examples, check following files/folders in API sources:
 
-- [unit-tests.sql](https://github.com/aherne/php-view-language-api/blob/v3.0.0/unit-tests.xml): SQL commands you need to run ONCE on server (assuming MySQL) before unit tests execution
-- [test.php](https://github.com/aherne/php-view-language-api/blob/v3.0.0/test.php): runs unit tests in console
-- [unit-tests.xml](https://github.com/aherne/php-view-language-api/blob/v3.0.0/unit-tests.xml): sets up unit tests and mocks "sql" tag
+- [unit-tests.sql](https://github.com/aherne/php-view-language-api/blob/master/unit-tests.xml): SQL commands you need to run ONCE on server (assuming MySQL) before unit tests execution
+- [test.php](https://github.com/aherne/php-view-language-api/blob/master/test.php): runs unit tests in console
+- [unit-tests.xml](https://github.com/aherne/php-view-language-api/blob/master/unit-tests.xml): sets up unit tests and mocks "sql" tag
 - [tests](https://github.com/aherne/php-view-language-api/tree/v3.0.0/tests): unit tests for classes from [src](https://github.com/aherne/php-view-language-api/tree/v3.0.0/src) folder
 
 ## Examples
@@ -348,8 +347,6 @@ Then above file is loaded in output buffer and bound with $data, so the final HT
 ```
 
 ## Reference Guide
-
-Below all [macro tags](#macro-tags) and [standard tags](#standard-tags) that come along with API are documented in great detail.
 
 ### tag escape
 
@@ -620,4 +617,3 @@ Examples how this tag is compiled into PHP:
 | ViewLanguage Example | PHP Translation |
 | --- | --- |
 | &lt;:break/:while&gt; | break; |
-
