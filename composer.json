@@ -1,9 +1,9 @@
 {
     "name": "lucinda/view-language",
     "type": "library",
-    "description": "High performance templating API using tags & expressions inspired by Java JSTL and C Compiler",
+    "description": "High performance view templating API  for PHP applications using tags & expressions inspired by Java JSTL and C Compiler",
     "keywords": ["templating","views","jstl"],
-    "homepage": "http://www.lucinda-framework.com/view-language",
+    "homepage": "https://github.com/aherne/php-view-language-api",
     "license": "MIT",
     "require": {
         "php": "^7.1",
