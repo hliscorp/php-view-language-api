@@ -39,7 +39,7 @@ class Wrapper
         // gets settings from attributes
         $this->compilationsFolder = (string) $xml["compilations_path"];
         if (!$this->compilationsFolder) {
-            throw new ConfigurationException("Attribute 'compilations' of tag 'templating' is empty or missing");
+            throw new ConfigurationException("Attribute 'compilations' is mandatory for 'templating' tag");
         }        
         $this->tagLibFolder = (string) $xml["tags_path"];
         $this->templatesFolder = (string) $xml["templates_path"];
