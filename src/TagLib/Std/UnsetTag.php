@@ -17,6 +17,7 @@ class UnsetTag extends SystemTag implements StartTag
      *
      * @param string[string] $parameters
      * @return string
+     * @throws \Lucinda\Templating\ViewException
      */
     public function parseStartTag(array $parameters=array()): string
     {

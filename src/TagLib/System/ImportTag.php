@@ -13,9 +13,9 @@ use Lucinda\Templating\ViewException;
  */
 class ImportTag
 {
-    private $viewCompilation;
-    private $templatesFolder;
-    private $templatesExtension;
+    private ViewCompilation $viewCompilation;
+    private string $templatesFolder;
+    private string $templatesExtension;
     
     /**
      * Sets up path in which template are looked after and the time of modification for page-specific view file.
@@ -30,13 +30,14 @@ class ImportTag
         $this->templatesExtension = $templatesExtension;
         $this->viewCompilation = $viewCompilation;
     }
-    
+
     /**
      * Parses template source file for import tags recursively. For each template file loaded, modification time is adjusted to confirm to the latest.
      *
      * @param string $templateFile
      * @param EscapeTag $escaper
      * @return string
+     * @throws ViewException
      */
     public function parse(string $templateFile, EscapeTag $escaper): string
     {

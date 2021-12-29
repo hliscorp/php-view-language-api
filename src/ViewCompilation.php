@@ -6,9 +6,9 @@ namespace Lucinda\Templating;
 */
 class ViewCompilation
 {
-    private $compilationPath;
-    private $checksumPath;
-    private $components = array();
+    private string $compilationPath;
+    private string $checksumPath;
+    private array $components = array();
 
     /**
      * Creates a compilation instance.
@@ -73,6 +73,7 @@ class ViewCompilation
      * Saves compilation & its checksum to disk.
      *
      * @param string $outputStream
+     * @throws ViewException
      */
     public function save(string $outputStream): void
     {

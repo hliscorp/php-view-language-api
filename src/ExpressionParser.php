@@ -19,7 +19,7 @@ class ExpressionParser
      */
     public function parse(string $subject): string
     {
-        if (strpos($subject, '${')===false) {
+        if (!str_contains($subject, '${')) {
             return $subject;
         }
         return preg_replace_callback("/[\$]\{((?:(?>[^{}]+?)|(?R))*?)\}/", array($this,"parseCallback"), $subject);
@@ -49,7 +49,7 @@ class ExpressionParser
      */
     protected function convertToVariable(string $dottedVariable): string
     {
-        if (strpos($dottedVariable, ".")===false) {
+        if (!str_contains($dottedVariable, ".")) {
             return str_replace(array("{","}"), "", $dottedVariable);
         } else {
             return preg_replace(array('/\$\{([a-zA-Z0-9_]+)(\.)?/','/\}/','/\./','/\[([a-zA-Z0-9_]+)\]/','/\[\]/'), array('$$1[',']','][','["$1"]',''), $dottedVariable);

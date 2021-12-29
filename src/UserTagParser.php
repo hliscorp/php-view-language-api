@@ -9,16 +9,15 @@ use Lucinda\Templating\TagLib\System\NamespaceTag;
  */
 class UserTagParser
 {
-    private $tagExtension;
-    private $viewCompilation;
-    private $namespaces;
-    private $attributesParser;
+    private string $tagExtension;
+    private ViewCompilation $viewCompilation;
+    private NamespaceTag $namespaces;
+    private AttributesParser $attributesParser;
     
     /**
      * Creates a tag parser instance.
      *
      * @param NamespaceTag $namespaces Object that encapsulates location of user-defined tag libraries.
-     * @param string $tagLibFolder Folder containing user-defined taglibs.
      * @param string $tagExtension Extension of user-defined tags.
      * @param ViewCompilation $viewCompilation Object that collects components that take part in view.
      */
@@ -29,13 +28,14 @@ class UserTagParser
         $this->viewCompilation = $viewCompilation;
         $this->attributesParser = new AttributesParser();
     }
-    
+
     /**
      * Looks for tags in views and returns an answer where each found match is converted to PHP.
      *
      * @param string $subject
      * @param EscapeTag $escaper
      * @return string
+     * @throws ViewException
      */
     public function parse(string $subject, EscapeTag $escaper): string
     {

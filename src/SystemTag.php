@@ -14,7 +14,7 @@ abstract class SystemTag
      */
     protected function isExpression(string $expression): bool
     {
-        return (strpos($expression, '${')!==false?true:false);
+        return str_contains($expression, '${');
     }
     
     /**

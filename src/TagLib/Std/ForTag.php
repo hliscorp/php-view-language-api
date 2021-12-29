@@ -3,6 +3,7 @@ namespace Lucinda\Templating\TagLib\Std;
 
 use Lucinda\Templating\StartEndTag;
 use Lucinda\Templating\SystemTag;
+use Lucinda\Templating\ViewException;
 
 /**
  * Implements how a FOR clause is translated into a tag.

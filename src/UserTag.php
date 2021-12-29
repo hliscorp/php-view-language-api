@@ -6,7 +6,7 @@ namespace Lucinda\Templating;
  */
 class UserTag implements StartTag
 {
-    private $filePath;
+    private string $filePath;
     
     /**
      * Constructs parser based on user-defined tag location.
@@ -28,7 +28,7 @@ class UserTag implements StartTag
     {
         $content= file_get_contents($this->filePath);
         return preg_replace_callback("/[\$]\[([a-zA-Z0-9\-_.]+)\]/", function ($match) use ($parameters) {
-            return (isset($parameters[$match[1]])?$parameters[$match[1]]:null);
+            return ($parameters[$match[1]] ?? null);
         }, $content);
     }
 }

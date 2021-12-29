@@ -12,9 +12,9 @@ use Lucinda\Templating\ViewException;
  */
 class NamespaceTag
 {
-    private $taglibFolder;
-    private $namespaces = array();
-    private $attributesParser;
+    private string $taglibFolder;
+    private array $namespaces = array();
+    private AttributesParser $attributesParser;
     
     /**
      * Creates an instance with default user defined tag library location. This will be used if no <:namespace> declaration is declared for that tag library

@@ -14,10 +14,10 @@ use Lucinda\Templating\TagLib\System\NamespaceTag;
  */
 class ViewLanguageParser
 {
-    private $templatesFolder;
-    private $compilationsFolder;
-    private $templatesExtension;
-    private $tagLibFolder;
+    private string $templatesFolder;
+    private string $compilationsFolder;
+    private string $templatesExtension;
+    private string $tagLibFolder;
     
     /**
      * Constructs a view language parser.

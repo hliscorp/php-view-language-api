@@ -6,10 +6,10 @@ namespace Lucinda\Templating;
  */
 class Wrapper
 {
-    private $templatesFolder;
-    private $compilationsFolder;
-    private $templatesExtension;
-    private $tagLibFolder;
+    private string $templatesFolder;
+    private string $compilationsFolder;
+    private string $templatesExtension;
+    private string $tagLibFolder;
     
     /**
      * Calls for interpreting contents of <application> XML tag.
@@ -60,7 +60,7 @@ class Wrapper
     public function compile(string $viewFile, array $data): string
     {        
         // gets view file
-        if ($this->templatesFolder && strpos($viewFile, $this->templatesFolder)===0) {
+        if ($this->templatesFolder && str_starts_with($viewFile, $this->templatesFolder)) {
             $viewFile = substr($viewFile, strlen($this->templatesFolder)+1);
         }
         

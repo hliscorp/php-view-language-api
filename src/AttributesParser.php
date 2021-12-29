@@ -6,7 +6,7 @@ namespace Lucinda\Templating;
  */
 class AttributesParser
 {
-    private $required = array();
+    private array $required = array();
     
     /**
      * Constructs parser from required attributes.

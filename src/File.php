@@ -6,7 +6,7 @@ namespace Lucinda\Templating;
  */
 class File
 {
-    private $path;
+    private string $path;
     
     /**
      * Creates an object.
@@ -46,7 +46,6 @@ class File
     /**
      * Gets contents of file.
      *
-     * @throws ViewException If file doesn't exist.
      * @return string
      */
     public function getContents(): string

@@ -9,8 +9,8 @@ namespace Lucinda\Templating\TagLib\System;
  */
 class EscapeTag
 {
-    private $matches=array();
-    private $counter=0;
+    private array $matches = array();
+    private int $counter = 0;
     
     /**
      * Locates escape tags, remembers their content and replaces them with placeholders.
