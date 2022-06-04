@@ -1,4 +1,5 @@
 <?php
+
 namespace Lucinda\Templating\TagLib\System;
 
 /**
@@ -9,9 +10,12 @@ namespace Lucinda\Templating\TagLib\System;
  */
 class EscapeTag
 {
-    private array $matches = array();
+    /**
+     * @var array<int,string>
+     */
+    private array $matches = [];
     private int $counter = 0;
-    
+
     /**
      * Locates escape tags, remembers their content and replaces them with placeholders.
      *
@@ -20,13 +24,17 @@ class EscapeTag
      */
     public function backup(string $subject): string
     {
-        return preg_replace_callback("/\<escape\>(.*?)\<\/escape\>/si", function ($matches) {
-            $this->matches[] = $matches[1];
-            ++$this->counter;
-            return "<bkp>".($this->counter-1)."</bkp>";
-        }, $subject);
+        return preg_replace_callback(
+            "/\<escape\>(.*?)\<\/escape\>/si",
+            function ($matches) {
+                $this->matches[] = $matches[1];
+                ++$this->counter;
+                return "<bkp>".($this->counter-1)."</bkp>";
+            },
+            $subject
+        );
     }
-    
+
     /**
      * Locates placeholders and replaces them with remembered escape tag bodies.
      *
@@ -39,10 +47,14 @@ class EscapeTag
         if ($this->counter == 0) {
             return $subject;
         }
-        
+
         // restore content of escape tags
-        return preg_replace_callback("/\<bkp\>(.*?)\<\/bkp\>/si", function ($matches) {
-            return $this->matches[$matches[1]];
-        }, $subject);
+        return preg_replace_callback(
+            "/\<bkp\>(.*?)\<\/bkp\>/si",
+            function ($matches) {
+                return $this->matches[(int) $matches[1]];
+            },
+            $subject
+        );
     }
 }

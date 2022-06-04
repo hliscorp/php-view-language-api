@@ -1,4 +1,5 @@
 <?php
+
 namespace Lucinda\Templating;
 
 /**
@@ -7,7 +8,7 @@ namespace Lucinda\Templating;
 class File
 {
     private string $path;
-    
+
     /**
      * Creates an object.
      *
@@ -17,7 +18,7 @@ class File
     {
         $this->path = $name;
     }
-    
+
     /**
      * Writes contents to file and creates it if it doesn't exist.
      *
@@ -42,7 +43,7 @@ class File
             throw new ViewException("Could not write compilation: ".$this->path);
         }
     }
-    
+
     /**
      * Gets contents of file.
      *
@@ -52,7 +53,7 @@ class File
     {
         return file_get_contents($this->path);
     }
-    
+
     /**
      * Checks if file exists.
      *
@@ -62,11 +63,11 @@ class File
     {
         return file_exists($this->path);
     }
-    
+
     /**
      * Gets modification time.
      *
-     * @return integer
+     * @return int
      */
     public function getModificationTime(): int
     {

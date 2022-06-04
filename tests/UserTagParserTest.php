@@ -1,4 +1,5 @@
 <?php
+
 namespace Test\Lucinda\Templating;
 
 use Lucinda\Templating\UserTagParser;
@@ -11,7 +12,11 @@ class UserTagParserTest
 {
     public function parse()
     {
-        $object = new UserTagParser(new NamespaceTag(__DIR__."/tags"), "html", new ViewCompilation(__DIR__."/compilations", "userTagParser", "html"));
+        $object = new UserTagParser(
+            new NamespaceTag(__DIR__."/tags"),
+            "html",
+            new ViewCompilation(dirname(__DIR__)."/compilations", "userTagParser", "html")
+        );
         return new Result($object->parse('<p><Greeting:client user="Lucian"/></p>', new EscapeTag())=="<p>Hello, Lucian!</p>");
     }
 }

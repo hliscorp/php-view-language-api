@@ -1,4 +1,5 @@
 <?php
+
 namespace Test\Lucinda\Templating\TagLib\Std;
 
 use Lucinda\Templating\TagLib\Std\IfTag;
@@ -11,7 +12,7 @@ class IfTagTest
         $object = new IfTag();
         return new Result($object->parseStartTag(["test"=>'${asd} == 1'])=='<?php if ($asd == 1) { ?>');
     }
-        
+
 
     public function parseEndTag()
     {

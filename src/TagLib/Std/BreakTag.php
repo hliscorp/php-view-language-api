@@ -1,4 +1,5 @@
 <?php
+
 namespace Lucinda\Templating\TagLib\Std;
 
 use Lucinda\Templating\StartTag;
@@ -15,10 +16,10 @@ class BreakTag extends SystemTag implements StartTag
     /**
      * Parses start tag.
      *
-     * @param string[string] $parameters
+     * @param array<string,string> $parameters
      * @return string
      */
-    public function parseStartTag(array $parameters=array()): string
+    public function parseStartTag(array $parameters=[]): string
     {
         return '<?php break; ?>';
     }

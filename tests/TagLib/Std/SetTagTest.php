@@ -1,4 +1,5 @@
 <?php
+
 namespace Test\Lucinda\Templating\TagLib\Std;
 
 use Lucinda\Templating\TagLib\Std\SetTag;

@@ -1,13 +1,14 @@
 <?php
+
 namespace Lucinda\Templating;
 
 /**
  * Implements scalar expressions that are going to be interpreted as PHP when response is displayed to client.
  *
  * Example of expression:
- * 		${request.client.ip}
+ *         ${request.client.ip}
  * This will be converted to:
- * 		<?php echo $request["client"]["ip"]; ?>
+ *         <?php echo $request["client"]["ip"]; ?>
  */
 class ExpressionParser
 {
@@ -22,25 +23,31 @@ class ExpressionParser
         if (!str_contains($subject, '${')) {
             return $subject;
         }
-        return preg_replace_callback("/[\$]\{((?:(?>[^{}]+?)|(?R))*?)\}/", array($this,"parseCallback"), $subject);
+        return preg_replace_callback(
+            "/[\$]\{((?:(?>[^{}]+?)|(?R))*?)\}/",
+            array($this,"parseCallback"),
+            $subject
+        );
     }
-    
+
     /**
      * For each macro-expression found, calls for its conversion to PHP and wraps it up as scriptlet.
      *
-     * @param array $matches
+     * @param array<int,string> $matches
      * @return string
      */
     protected function parseCallback(array $matches): string
     {
         $position = strpos($matches[1], "(");
         if ($position!==false) {
-            return '<?php echo '.substr($matches[1], 0, $position).$this->convertToVariable(substr($matches[1], $position)).'; ?>';
+            $variable = $this->convertToVariable(substr($matches[1], $position));
+            return '<?php echo '.substr($matches[1], 0, $position).$variable.'; ?>';
         } else {
-            return '<?php echo '.$this->convertToVariable($matches[0]).'; ?>';
+            $variable = $this->convertToVariable($matches[0]);
+            return '<?php echo '.$variable.'; ?>';
         }
     }
-    
+
     /**
      * Performs conversion of expression to PHP.
      *
@@ -52,7 +59,11 @@ class ExpressionParser
         if (!str_contains($dottedVariable, ".")) {
             return str_replace(array("{","}"), "", $dottedVariable);
         } else {
-            return preg_replace(array('/\$\{([a-zA-Z0-9_]+)(\.)?/','/\}/','/\./','/\[([a-zA-Z0-9_]+)\]/','/\[\]/'), array('$$1[',']','][','["$1"]',''), $dottedVariable);
+            return preg_replace(
+                array('/\$\{([a-zA-Z0-9_]+)(\.)?/','/\}/','/\./','/\[([a-zA-Z0-9_]+)\]/','/\[\]/'),
+                array('$$1[',']','][','["$1"]',''),
+                $dottedVariable
+            );
         }
     }
 }

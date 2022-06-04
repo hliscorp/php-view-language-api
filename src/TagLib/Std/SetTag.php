@@ -1,4 +1,5 @@
 <?php
+
 namespace Lucinda\Templating\TagLib\Std;
 
 use Lucinda\Templating\SystemTag;
@@ -15,13 +16,22 @@ class SetTag extends SystemTag implements StartTag
     /**
      * Parses start tag.
      *
-     * @param string[string] $parameters
+     * @param array<string,string> $parameters
      * @return string
      * @throws \Lucinda\Templating\ViewException
      */
-    public function parseStartTag(array $parameters=array()): string
+    public function parseStartTag(array $parameters=[]): string
     {
         $this->checkParameters($parameters, array("var"));
-        return '<?php $'.$parameters['var'].' = '.(isset($parameters['val'])?($this->isExpression($parameters['val'])?$this->parseExpression($parameters['val']):"'".addslashes($parameters['val'])."'"):"null").'; ?>';
+        $left = '$'.$parameters['var'];
+        $right = "null";
+        if (isset($parameters['val'])) {
+            if ($this->isExpression($parameters['val'])) {
+                $right = $this->parseExpression($parameters['val']);
+            } else {
+                $right = "'".addslashes($parameters['val'])."'";
+            }
+        }
+        return '<?php '.$left.' = '.$right.'; ?>';
     }
 }

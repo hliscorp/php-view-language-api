@@ -1,4 +1,5 @@
 <?php
+
 namespace Lucinda\Templating;
 
 /**
@@ -16,7 +17,7 @@ abstract class SystemTag
     {
         return str_contains($expression, '${');
     }
-    
+
     /**
      * Converts expressions from tag attribute values into PHP.
      *
@@ -28,12 +29,12 @@ abstract class SystemTag
         $expressionObject = new TagExpressionParser();
         return $expressionObject->parse($expression);
     }
-    
+
     /**
      * Verifies if tag has required attributes defined.
      *
-     * @param string[string] $parameters
-     * @param string[] $requiredParameters
+     * @param array<string,string> $parameters
+     * @param string[]             $requiredParameters
      * @throws ViewException If a required attribute is not found.
      */
     protected function checkParameters(array $parameters, array $requiredParameters): void

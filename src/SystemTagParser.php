@@ -1,4 +1,5 @@
 <?php
+
 namespace Lucinda\Templating;
 
 /**
@@ -7,7 +8,7 @@ namespace Lucinda\Templating;
 class SystemTagParser
 {
     private AttributesParser $attributesParser;
-    
+
     /**
      * Constructor instancing attributes parser
      */
@@ -26,18 +27,27 @@ class SystemTagParser
     public function parse(string $subject): string
     {
         // match start & end tags
-        $subject = preg_replace_callback("/<:([a-z]+)(\s*(.*)\s*=\s*\"(.*)\"\s*)?\/?>/", function ($matches) {
-            return $this->getTagInstance($matches)->parseStartTag(isset($matches[2])?$this->attributesParser->parse($matches[2]):array());
-        }, $subject);
-        return preg_replace_callback("/<\/:([a-z]+)>/", function ($matches) {
-            return $this->getTagInstance($matches)->parseEndTag();
-        }, $subject);
+        $subject = preg_replace_callback(
+            "/<:([a-z]+)(\s*(.*)\s*=\s*\"(.*)\"\s*)?\/?>/",
+            function ($matches) {
+                $parameters = isset($matches[2]) ? $this->attributesParser->parse($matches[2]) : [];
+                return $this->getTagInstance($matches)->parseStartTag($parameters);
+            },
+            $subject
+        );
+        return preg_replace_callback(
+            "/<\/:([a-z]+)>/",
+            function ($matches) {
+                return $this->getTagInstance($matches)->parseEndTag();
+            },
+            $subject
+        );
     }
-    
+
     /**
      * Detects tag class from tag declaration.
      *
-     * @param array $matches
+     * @param array<int,string> $matches
      * @return StartTag|StartEndTag
      */
     private function getTagInstance(array $matches): StartTag|StartEndTag

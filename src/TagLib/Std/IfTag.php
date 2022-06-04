@@ -1,4 +1,5 @@
 <?php
+
 namespace Lucinda\Templating\TagLib\Std;
 
 use Lucinda\Templating\SystemTag;
@@ -7,20 +8,20 @@ use Lucinda\Templating\ViewException;
 
 /**
  * Implements how an IF clause is translated into a tag.
-*
-* Tag syntax:
-* <:if test="EXPRESSION">BODY</:if>
-*/
+ *
+ * Tag syntax:
+ * <:if test="EXPRESSION">BODY</:if>
+ */
 class IfTag extends SystemTag implements StartEndTag
 {
     /**
      * Parses start tag.
      *
-     * @param string[string] $parameters
+     * @param array<string,string> $parameters
      * @return string
      * @throws ViewException If required parameters aren't supplied
      */
-    public function parseStartTag(array $parameters=array()): string
+    public function parseStartTag(array $parameters=[]): string
     {
         $this->checkParameters($parameters, array("test"));
         return '<?php if ('.$this->parseExpression($parameters['test']).') { ?>';

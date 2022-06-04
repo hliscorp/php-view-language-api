@@ -1,4 +1,5 @@
 <?php
+
 namespace Test\Lucinda\Templating;
 
 use Lucinda\Templating\AttributesParser;

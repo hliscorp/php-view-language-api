@@ -1,14 +1,18 @@
 <?php
+
 namespace Lucinda\Templating;
 
 /**
  * Abstracts view compilation logic.
-*/
+ */
 class ViewCompilation
 {
     private string $compilationPath;
     private string $checksumPath;
-    private array $components = array();
+    /**
+     * @var string[]
+     */
+    private array $components = [];
 
     /**
      * Creates a compilation instance.
@@ -27,7 +31,7 @@ class ViewCompilation
             $this->components = explode(",", $contents);
         }
     }
-    
+
     /**
      * Gets compilation file path.
      *
@@ -51,7 +55,7 @@ class ViewCompilation
     /**
      * Gets latest modification time of compilation components.
      *
-     * @return integer Greater than zero if all components found, -1 if at least one component is not found.
+     * @return int Greater than zero if all components found, -1 if at least one component is not found.
      */
     private function getLatestModificationTime(): int
     {
@@ -85,7 +89,7 @@ class ViewCompilation
         $compilation = new File($this->compilationPath);
         $compilation->putContents($outputStream);
     }
-    
+
     /**
      * Checks if any of compilation components have changed since last update.
      *
@@ -96,17 +100,17 @@ class ViewCompilation
         $compilation = new File($this->compilationPath);
         if (!empty($this->components)) {
             if ($compilation->exists()) {
-                $latestModificationTime = $this->getLatestModificationTime();
-                if ($latestModificationTime==-1) {
-                    $this->components = array();
+                $time = $this->getLatestModificationTime();
+                if ($time==-1) {
+                    $this->components = [];
                     return true;
                 }
-                if ($compilation->getModificationTime() >= $latestModificationTime) {
+                if ($compilation->getModificationTime() >= $time) {
                     return false;
                 }
             }
             // reset components
-            $this->components = array();
+            $this->components = [];
         }
         return true;
     }

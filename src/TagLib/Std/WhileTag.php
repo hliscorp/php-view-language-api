@@ -1,4 +1,5 @@
 <?php
+
 namespace Lucinda\Templating\TagLib\Std;
 
 use Lucinda\Templating\SystemTag;
@@ -16,16 +17,16 @@ class WhileTag extends SystemTag implements StartEndTag
     /**
      * Parses start tag.
      *
-     * @param string[string] $parameters
+     * @param array<string,string> $parameters
      * @return string
      * @throws ViewException If required parameters aren't supplied
      */
-    public function parseStartTag(array $parameters=array()): string
+    public function parseStartTag(array $parameters=[]): string
     {
         $this->checkParameters($parameters, array("test"));
         return '<?php while ('.$this->parseExpression($parameters['test']).') { ?>';
     }
-    
+
     /**
      * Parses end tag.
      *

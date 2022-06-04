@@ -1,4 +1,5 @@
 <?php
+
 namespace Test\Lucinda\Templating\TagLib\Std;
 
 use Lucinda\Templating\TagLib\Std\ForTag;
@@ -9,9 +10,9 @@ class ForTagTest
     public function parseStartTag()
     {
         $object = new ForTag();
-        return new Result($object->parseStartTag(["var"=>'i',"start"=>"0", "end"=>"10"])=='<?php for ($i=0; $i<=10; $i++) { ?>');
+        return new Result($object->parseStartTag(["var"=>'i',"start"=>"0", "end"=>"10"])=='<?php for ($i=0; $i<=10; $i+=1) { ?>');
     }
-        
+
 
     public function parseEndTag()
     {

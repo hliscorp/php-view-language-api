@@ -1,4 +1,5 @@
 <?php
+
 namespace Lucinda\Templating;
 
 use Lucinda\Templating\TagLib\System\EscapeTag;
@@ -13,12 +14,12 @@ class UserTagParser
     private ViewCompilation $viewCompilation;
     private NamespaceTag $namespaces;
     private AttributesParser $attributesParser;
-    
+
     /**
      * Creates a tag parser instance.
      *
-     * @param NamespaceTag $namespaces Object that encapsulates location of user-defined tag libraries.
-     * @param string $tagExtension Extension of user-defined tags.
+     * @param NamespaceTag    $namespaces      Object that encapsulates location of user-defined tag libraries.
+     * @param string          $tagExtension    Extension of user-defined tags.
      * @param ViewCompilation $viewCompilation Object that collects components that take part in view.
      */
     public function __construct(NamespaceTag $namespaces, string $tagExtension, ViewCompilation $viewCompilation)
@@ -32,7 +33,7 @@ class UserTagParser
     /**
      * Looks for tags in views and returns an answer where each found match is converted to PHP.
      *
-     * @param string $subject
+     * @param string    $subject
      * @param EscapeTag $escaper
      * @return string
      * @throws ViewException
@@ -40,23 +41,28 @@ class UserTagParser
     public function parse(string $subject, EscapeTag $escaper): string
     {
         // match start & end tags
-        $subject = preg_replace_callback("/<([a-zA-Z0-9\-_.]+)\:([a-zA-Z0-9\-_.]+)\s*([^>]+)?>/", function ($matches) {
-            return $this->getTagInstance($matches)->parseStartTag(isset($matches[3])?$this->attributesParser->parse($matches[3]):array());
-        }, $subject);
+        $subject = preg_replace_callback(
+            "/<([a-zA-Z0-9\-_.]+)\:([a-zA-Z0-9\-_.]+)\s*([^>]+)?>/",
+            function ($matches) {
+                $parameters = isset($matches[3]) ? $this->attributesParser->parse($matches[3]) : [];
+                return $this->getTagInstance($matches)->parseStartTag($parameters);
+            },
+            $subject
+        );
         $subject = $escaper->backup($subject);
-        
+
         // if it still contains tags, recurse until all tags are parsed
         if (preg_match("/<([a-zA-Z\-]+)\:([a-zA-Z\-]+)(.*?)>/", $subject)!=0) {
             $subject = $this->parse($subject, $escaper);
         }
-        
+
         return $subject;
     }
-    
+
     /**
      * Detects tag instance from tag declaration.
      *
-     * @param array $matches
+     * @param array<int,string> $matches
      * @throws ViewException
      * @return UserTag
      */
