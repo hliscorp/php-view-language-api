@@ -36,8 +36,8 @@ class ImportTag
      * Parses template source file for import tags recursively. For each template file loaded, modification time is
      * adjusted to confirm to the latest.
      *
-     * @param string    $templateFile
-     * @param EscapeTag $escaper
+     * @param  string    $templateFile
+     * @param  EscapeTag $escaper
      * @return string
      * @throws ViewException
      */

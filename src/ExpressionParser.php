@@ -15,7 +15,7 @@ class ExpressionParser
     /**
      * Looks for variable expressions in SUBJECT and returns answer where expressions are converted to PHP.
      *
-     * @param string $subject
+     * @param  string $subject
      * @return string
      */
     public function parse(string $subject): string
@@ -33,7 +33,7 @@ class ExpressionParser
     /**
      * For each macro-expression found, calls for its conversion to PHP and wraps it up as scriptlet.
      *
-     * @param array<int,string> $matches
+     * @param  array<int,string> $matches
      * @return string
      */
     protected function parseCallback(array $matches): string
@@ -51,7 +51,7 @@ class ExpressionParser
     /**
      * Performs conversion of expression to PHP.
      *
-     * @param string $dottedVariable
+     * @param  string $dottedVariable
      * @return string
      */
     protected function convertToVariable(string $dottedVariable): string

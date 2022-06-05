@@ -20,7 +20,7 @@ class SystemTagParser
     /**
      * Looks for tags in views and returns an answer where each found match is converted to PHP.
      *
-     * @param string $subject
+     * @param  string $subject
      * @return string
      * @throws ViewException
      */
@@ -47,7 +47,7 @@ class SystemTagParser
     /**
      * Detects tag class from tag declaration.
      *
-     * @param array<int,string> $matches
+     * @param  array<int,string> $matches
      * @return StartTag|StartEndTag
      */
     private function getTagInstance(array $matches): StartTag|StartEndTag

@@ -36,7 +36,7 @@ class NamespaceTag
      * Parses output stream for namespace tags. If found, remembers taglib/folder correspondence then removes
      * tag declaration.
      *
-     * @param string $outputStream Output stream possibly containing <:namespace ...> tag declarations.
+     * @param  string $outputStream Output stream possibly containing <:namespace ...> tag declarations.
      * @throws ViewException If referenced fikder could not be located on disk.
      * @return string Output stream without <:namespace ...> tag declarations.
      */
@@ -59,7 +59,7 @@ class NamespaceTag
     /**
      * Gets taglib location on disk.
      *
-     * @param string $tagLib Name of tag library.
+     * @param  string $tagLib Name of tag library.
      * @return string Folder tag library folder lies into.
      */
     public function get(string $tagLib): string

@@ -44,7 +44,7 @@ class ViewLanguageParser
      * Compiles ViewLanguage instructions in input file/string into PHP, saves global view into a compilation file,
      * then returns location to that file.
      *
-     * @param string $templatePath Relative path to template file that needs to be compiled within templates folder
+     * @param  string $templatePath Relative path to template file that needs to be compiled within templates folder
      * @return string Compilation file name, containing response stream after view language constructs were parsed.
      * @throws ViewException If compilation fails
      */

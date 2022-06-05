@@ -76,7 +76,7 @@ class ViewCompilation
     /**
      * Saves compilation & its checksum to disk.
      *
-     * @param string $outputStream
+     * @param  string $outputStream
      * @throws ViewException
      */
     public function save(string $outputStream): void

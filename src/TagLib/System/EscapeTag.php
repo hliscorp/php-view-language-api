@@ -19,7 +19,7 @@ class EscapeTag
     /**
      * Locates escape tags, remembers their content and replaces them with placeholders.
      *
-     * @param string $subject
+     * @param  string $subject
      * @return string
      */
     public function backup(string $subject): string
@@ -38,7 +38,7 @@ class EscapeTag
     /**
      * Locates placeholders and replaces them with remembered escape tag bodies.
      *
-     * @param string $subject
+     * @param  string $subject
      * @return string
      */
     public function restore(string $subject): string

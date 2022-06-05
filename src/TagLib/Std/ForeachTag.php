@@ -17,7 +17,7 @@ class ForeachTag extends SystemTag implements StartEndTag
     /**
      * Parses start tag.
      *
-     * @param array<string,string> $parameters
+     * @param  array<string,string> $parameters
      * @return string
      * @throws ViewException If required parameters aren't supplied
      */
@@ -43,8 +43,8 @@ class ForeachTag extends SystemTag implements StartEndTag
     /**
      * Verifies if tag has required attributes defined.
      *
-     * @param array<string,string> $parameters
-     * @param string[]             $requiredParameters
+     * @param  array<string,string> $parameters
+     * @param  string[]             $requiredParameters
      * @throws ViewException If a required attribute is not found.
      */
     protected function checkParameters(array $parameters, array $requiredParameters): void

@@ -22,7 +22,7 @@ class File
     /**
      * Writes contents to file and creates it if it doesn't exist.
      *
-     * @param string $content
+     * @param  string $content
      * @throws ViewException If you are not allowed to write on that file.
      */
     public function putContents(string $content): void

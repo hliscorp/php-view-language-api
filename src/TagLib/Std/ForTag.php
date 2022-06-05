@@ -17,7 +17,7 @@ class ForTag extends SystemTag implements StartEndTag
     /**
      * Parses start tag.
      *
-     * @param array<string,string> $parameters
+     * @param  array<string,string> $parameters
      * @return string
      * @throws ViewException If required parameters aren't supplied
      */
@@ -44,7 +44,7 @@ class ForTag extends SystemTag implements StartEndTag
     /**
      * Parses start & end attributes, which may be either integers or expressions.
      *
-     * @param string $expression
+     * @param  string $expression
      * @return string
      */
     private function parseCounter(string $expression): string

@@ -16,7 +16,7 @@ class SetTag extends SystemTag implements StartTag
     /**
      * Parses start tag.
      *
-     * @param array<string,string> $parameters
+     * @param  array<string,string> $parameters
      * @return string
      * @throws \Lucinda\Templating\ViewException
      */

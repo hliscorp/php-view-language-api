@@ -17,7 +17,7 @@ class WhileTag extends SystemTag implements StartEndTag
     /**
      * Parses start tag.
      *
-     * @param array<string,string> $parameters
+     * @param  array<string,string> $parameters
      * @return string
      * @throws ViewException If required parameters aren't supplied
      */

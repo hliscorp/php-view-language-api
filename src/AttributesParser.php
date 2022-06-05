@@ -25,7 +25,7 @@ class AttributesParser
     /**
      * Parses string for tag attributes via regex
      *
-     * @param string $parameters
+     * @param  string $parameters
      * @throws ViewException If string doesn't included attributes required by tag
      * @return array<string,string> Attributes by name and value.
      */

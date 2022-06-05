@@ -10,7 +10,7 @@ abstract class SystemTag
     /**
      * Checks if tag attribute values contain expressions.
      *
-     * @param string $expression
+     * @param  string $expression
      * @return boolean
      */
     protected function isExpression(string $expression): bool
@@ -21,7 +21,7 @@ abstract class SystemTag
     /**
      * Converts expressions from tag attribute values into PHP.
      *
-     * @param string $expression
+     * @param  string $expression
      * @return string
      */
     protected function parseExpression(string $expression): string
@@ -33,8 +33,8 @@ abstract class SystemTag
     /**
      * Verifies if tag has required attributes defined.
      *
-     * @param array<string,string> $parameters
-     * @param string[]             $requiredParameters
+     * @param  array<string,string> $parameters
+     * @param  string[]             $requiredParameters
      * @throws ViewException If a required attribute is not found.
      */
     protected function checkParameters(array $parameters, array $requiredParameters): void

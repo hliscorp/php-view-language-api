@@ -15,7 +15,7 @@ class Wrapper
     /**
      * Calls for interpreting contents of <application> XML tag.
      *
-     * @param \SimpleXMLElement $xml XML file holding compiler settings.
+     * @param  \SimpleXMLElement $xml XML file holding compiler settings.
      * @throws ConfigurationException If XML is improperly configured.
      */
     public function __construct(\SimpleXMLElement $xml)
@@ -26,7 +26,7 @@ class Wrapper
     /**
      * Reads XML then delegates to ViewLanguageAPI to compile a templated view recursively into a PHP file.
      *
-     * @param \SimpleXMLElement $xml XML file holding compiler settings.
+     * @param  \SimpleXMLElement $xml XML file holding compiler settings.
      * @throws ConfigurationException If XML is improperly configured.
      */
     private function readConfiguration(\SimpleXMLElement $xml): void
@@ -53,8 +53,8 @@ class Wrapper
     /**
      * Loads compilation file, binds it to data and returns HTML to be rendered
      *
-     * @param string $viewFile View file location (without extension, optionally including views folder path)
-     * @param array  $data
+     * @param  string $viewFile View file location (without extension, optionally including views folder path)
+     * @param  array  $data
      * @return string
      * @throws ViewException If compilation failed due to a developer error.
      */

@@ -33,8 +33,8 @@ class UserTagParser
     /**
      * Looks for tags in views and returns an answer where each found match is converted to PHP.
      *
-     * @param string    $subject
-     * @param EscapeTag $escaper
+     * @param  string    $subject
+     * @param  EscapeTag $escaper
      * @return string
      * @throws ViewException
      */
@@ -62,7 +62,7 @@ class UserTagParser
     /**
      * Detects tag instance from tag declaration.
      *
-     * @param array<int,string> $matches
+     * @param  array<int,string> $matches
      * @throws ViewException
      * @return UserTag
      */

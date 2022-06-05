@@ -11,7 +11,7 @@ class TagExpressionParser extends ExpressionParser
     /**
      * For each macro-expression found, calls for its conversion to PHP and wraps it up as scriptlet.
      *
-     * @param array<int,string> $matches
+     * @param  array<int,string> $matches
      * @return string
      */
     protected function parseCallback(array $matches): string
