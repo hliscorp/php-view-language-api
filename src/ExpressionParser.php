@@ -52,7 +52,11 @@ class ExpressionParser
         if (strpos($dottedVariable, ".")===false) {
             return str_replace(array("{","}"), "", $dottedVariable);
         } else {
-            return preg_replace(array('/\$\{([a-zA-Z0-9_]+)(\.)?/','/\}/','/\./','/\[([a-zA-Z0-9_]+)\]/','/\[\]/'), array('$$1[',']','][','["$1"]',''), $dottedVariable);
+            return preg_replace(
+                ['/\${(\w+)(\.)?/','/\}/','/\./','/\[(\w+)\]/','/\[\]/'],
+                ['$$1[',']','][','["$1"]',''],
+                $dottedVariable
+            );
         }
     }
 }

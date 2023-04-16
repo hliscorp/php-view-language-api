@@ -40,13 +40,13 @@ class UserTagParser
     public function parse(string $subject, EscapeTag $escaper): string
     {
         // match start & end tags
-        $subject = preg_replace_callback("/<([a-zA-Z0-9\-_.]+)\:([a-zA-Z0-9\-_.]+)\s*([^>]+)?>/", function ($matches) {
+        $subject = preg_replace_callback("/<([\w\-]+):([\w\-]+)\s*([^>]*)?>/", function ($matches) {
             return $this->getTagInstance($matches)->parseStartTag(isset($matches[3])?$this->attributesParser->parse($matches[3]):array());
         }, $subject);
         $subject = $escaper->backup($subject);
         
         // if it still contains tags, recurse until all tags are parsed
-        if (preg_match("/<([a-zA-Z\-]+)\:([a-zA-Z\-]+)(.*?)>/", $subject)!=0) {
+        if (preg_match("/<([\w\-]+):([\w\-]+)(.*?)>/", $subject)!=0) {
             $subject = $this->parse($subject, $escaper);
         }
         
