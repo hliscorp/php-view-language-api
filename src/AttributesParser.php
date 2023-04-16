@@ -39,7 +39,7 @@ class AttributesParser
             }
         }
         $tmp = [];
-        preg_match_all('/([a-zA-Z0-9\-_.]+)\s*=\s*"\s*([^"]+)\s*"/', $parameters, $tmp, PREG_SET_ORDER);
+        preg_match_all('/([\w\-.]+)\s*=\s*"([^"]+)"/', $parameters, $tmp, PREG_SET_ORDER);
         $output=[];
         foreach ($tmp as $values) {
             $output[$values[1]]=$values[2];
@@ -61,7 +61,7 @@ class AttributesParser
     {
         $matches = [];
         $trace = debug_backtrace();
-        preg_match("/([a-zA-Z]+)\/([a-zA-Z]+)Tag.php$/", $trace[1]["file"], $matches);
+        preg_match("/([[:alpha:]])\/([[:alpha:]])Tag.php$/", $trace[1]["file"], $matches);
         return ($matches[1]=="Std" ? ":" : "").strtolower($matches[2]);
     }
 }

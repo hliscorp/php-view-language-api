@@ -29,7 +29,7 @@ class UserTag implements StartTag
     {
         $content= file_get_contents($this->filePath);
         return preg_replace_callback(
-            "/[\$]\[([a-zA-Z0-9\-_.]+)\]/",
+            "/[\$]\[([\w\-.]+)\]/",
             function ($match) use ($parameters) {
                 return ($parameters[$match[1]] ?? null);
             },

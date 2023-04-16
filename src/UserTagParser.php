@@ -42,7 +42,7 @@ class UserTagParser
     {
         // match start & end tags
         $subject = preg_replace_callback(
-            "/<([a-zA-Z0-9\-_.]+)\:([a-zA-Z0-9\-_.]+)\s*([^>]+)?>/",
+            "/<([\w\-]+):([\w\-]+)\s*([^>]*)?>/",
             function ($matches) {
                 $parameters = isset($matches[3]) ? $this->attributesParser->parse($matches[3]) : [];
                 return $this->getTagInstance($matches)->parseStartTag($parameters);
@@ -52,7 +52,7 @@ class UserTagParser
         $subject = $escaper->backup($subject);
 
         // if it still contains tags, recurse until all tags are parsed
-        if (preg_match("/<([a-zA-Z\-]+)\:([a-zA-Z\-]+)(.*?)>/", $subject)!=0) {
+        if (preg_match("/<([\w\-]+):([\w\-]+)(.*?)>/", $subject)!=0) {
             $subject = $this->parse($subject, $escaper);
         }
 
