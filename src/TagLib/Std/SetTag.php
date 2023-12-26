@@ -44,7 +44,7 @@ class SetTag extends SystemTag implements StartTag
      * @param string $expression
      * @return bool
      */
-    protected function isFunction($expression): bool
+    protected function isFunction(string $expression): bool
     {
         return (bool) preg_match("/^[a-zA-Z0-9_'\"]+\s*\(([^\)]+)\)$/", $expression);
     }
