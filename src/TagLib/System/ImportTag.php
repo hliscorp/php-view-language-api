@@ -13,9 +13,9 @@ use Lucinda\Templating\ViewException;
  */
 class ImportTag
 {
-    private $viewCompilation;
-    private $templatesFolder;
-    private $templatesExtension;
+    protected $viewCompilation;
+    protected $templatesFolder;
+    protected $templatesExtension;
     
     /**
      * Sets up path in which template are looked after and the time of modification for page-specific view file.

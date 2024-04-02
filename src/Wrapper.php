@@ -6,10 +6,10 @@ namespace Lucinda\Templating;
  */
 class Wrapper
 {
-    private $templatesFolder;
-    private $compilationsFolder;
-    private $templatesExtension;
-    private $tagLibFolder;
+    protected $templatesFolder;
+    protected $compilationsFolder;
+    protected $templatesExtension;
+    protected $tagLibFolder;
     
     /**
      * Calls for interpreting contents of <application> XML tag.
@@ -28,7 +28,7 @@ class Wrapper
      * @param \SimpleXMLElement $xml XML file holding compiler settings.
      * @throws ConfigurationException If XML is improperly configured.
      */
-    private function readConfiguration(\SimpleXMLElement $xml): void
+    protected function readConfiguration(\SimpleXMLElement $xml): void
     {
         // parses XML
         $xml = $xml->templating;
