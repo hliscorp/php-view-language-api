@@ -43,7 +43,7 @@ class ForTag extends SystemTag implements StartEndTag
      * @param string $expression
      * @return integer
      */
-    private function parseCounter(string $expression): int
+    private function parseCounter(string $expression): string
     {
         if (is_numeric($expression)) {
             return $expression;
