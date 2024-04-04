@@ -9,10 +9,10 @@ use Lucinda\Templating\TagLib\System\NamespaceTag;
  */
 class UserTagParser
 {
-    private $tagExtension;
-    private $viewCompilation;
-    private $namespaces;
-    private $attributesParser;
+    protected $tagExtension;
+    protected $viewCompilation;
+    protected $namespaces;
+    protected $attributesParser;
     
     /**
      * Creates a tag parser instance.
@@ -60,7 +60,7 @@ class UserTagParser
      * @throws ViewException
      * @return UserTag
      */
-    private function getTagInstance(array $matches): UserTag
+    protected function getTagInstance(array $matches): UserTag
     {
         $libraryName = $matches[1];
         $tagName = $matches[2];
