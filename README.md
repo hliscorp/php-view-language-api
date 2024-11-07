@@ -196,7 +196,7 @@ Since the whole process is somewhat performance hungry, PHP compilation files wi
 First choose a folder where API will be installed then write this command there using console:
 
 ```console
-composer require lucinda/templating
+composer require lucinda/view-language
 ```
 
 Then create a *configuration.xml* file holding configuration settings (see [configuration](#configuration) above) and a *index.php* file in project root with following code:
