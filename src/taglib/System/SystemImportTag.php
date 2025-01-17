@@ -45,12 +45,13 @@ class SystemImportTag
         $subject = ($outputStream==""?$file->getContents():$outputStream);
         $subject = $escaper->backup($subject);
         $this->viewCompilation->addComponent($path);
-        
-        return "<!-- VL:START: ".$path." -->\n".preg_replace_callback("/<import\s*(file\s*\=\s*\"(.*?)\")?\s*\/?>/", function ($matches) use ($escaper) {
+
+        $comment = new TagComment($path);
+        return $comment->start().preg_replace_callback("/<import\s*(file\s*\=\s*\"(.*?)\")?\s*\/?>/", function ($matches) use ($escaper) {
             if (empty($matches[2])) {
                 throw new ViewException("Tag 'import' requires attribute: file");
             }
             return $this->parse($matches[2], $escaper);
-        }, $subject)."\n<!-- VL:END: ".$path." -->\n";
+        }, $subject).$comment->end();
     }
 }

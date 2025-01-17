@@ -7,6 +7,7 @@ require("ExpressionParser.php");
 require("taglib/System/loader.php");
 require("UserTagParser.php");
 require("SystemTagParser.php");
+require("TagComment.php");
 
 /**
  * Compiles a ViewLanguage template recursively into a PHP file on disk based on:
