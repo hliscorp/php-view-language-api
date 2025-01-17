@@ -29,8 +29,8 @@ class UserTag implements StartTag
     public function parseStartTag($parameters=array())
     {
         $content= file_get_contents($this->filePath);
-        return preg_replace_callback("/[\$]\[([a-zA-Z0-9\-_.]+)\]/", function ($match) use ($parameters) {
+        return "<!-- VL:START: ".$this->filePath." -->\n".preg_replace_callback("/[\$]\[([a-zA-Z0-9\-_.]+)\]/", function ($match) use ($parameters) {
             return (isset($parameters[$match[1]])?$parameters[$match[1]]:null);
-        }, $content);
+        }, $content)."\n<!-- VL:END: ".$this->filePath." -->\n";
     }
 }

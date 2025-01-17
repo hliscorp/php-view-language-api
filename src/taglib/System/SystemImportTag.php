@@ -46,11 +46,11 @@ class SystemImportTag
         $subject = $escaper->backup($subject);
         $this->viewCompilation->addComponent($path);
         
-        return preg_replace_callback("/<import\s*(file\s*\=\s*\"(.*?)\")?\s*\/?>/", function ($matches) use ($escaper) {
+        return "<!-- VL:START: ".$path." -->\n".preg_replace_callback("/<import\s*(file\s*\=\s*\"(.*?)\")?\s*\/?>/", function ($matches) use ($escaper) {
             if (empty($matches[2])) {
                 throw new ViewException("Tag 'import' requires attribute: file");
             }
             return $this->parse($matches[2], $escaper);
-        }, $subject);
+        }, $subject)."\n<!-- VL:END: ".$path." -->\n";
     }
 }
