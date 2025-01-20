@@ -65,7 +65,7 @@ class Wrapper
             $viewFile = substr($viewFile, strlen($this->templatesFolder)+1);
         }
 
-        // compiles templates recursively into a single PHP file
+        // compiles templates recursively into a single HTML compilation file
         $vlp = new ViewLanguageParser(
             $this->templatesFolder,
             $this->templatesExtension,
@@ -75,6 +75,18 @@ class Wrapper
         $compilationFile = $vlp->compile($viewFile);
 
         // compiles PHP file into HTML
+        return $this->bind($compilationFile, $data);
+    }
+
+    /**
+     * Binds compilation file to data, returning final HTML
+     *
+     * @param string $compilationFile
+     * @param array $data
+     * @return string
+     */
+    protected function bind(string $compilationFile, array $data): string
+    {
         try {
             ob_start();
             include $compilationFile;
