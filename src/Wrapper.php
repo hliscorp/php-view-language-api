@@ -75,11 +75,15 @@ class Wrapper
         $compilationFile = $vlp->compile($viewFile);
 
         // compiles PHP file into HTML
-        ob_start();
-        include $compilationFile;
-        $output = ob_get_contents();
-        ob_end_clean();
+        try {
+            ob_start();
+            include $compilationFile;
+            $output = ob_get_contents();
+        } finally {
+            ob_end_clean();
+        }
 
-        return $output;
+        // removes comments, by default
+        return preg_replace("/<!-- VL:(START|END):\s*(.*?)\s*-->/", "", $output);
     }
 }

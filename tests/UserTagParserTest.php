@@ -17,6 +17,9 @@ class UserTagParserTest
             "html",
             new ViewCompilation(dirname(__DIR__)."/compilations", "userTagParser", "html")
         );
-        return new Result($object->parse('<p><Greeting:client user="Lucian"/></p>', new EscapeTag())=="<p>Hello, Lucian!</p>");
+        return new Result($object->parse('<p><Greeting:client user="Lucian"/></p>', new EscapeTag())=="<p><!-- VL:START: /home/aherne/work/framework/php-view-language-api/tests/tags/Greeting/client.html -->
+Hello, Lucian!
+<!-- VL:END: /home/aherne/work/framework/php-view-language-api/tests/tags/Greeting/client.html -->
+</p>");
     }
 }
