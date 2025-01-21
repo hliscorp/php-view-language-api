@@ -1,6 +1,7 @@
 <?php
 namespace Lucinda\Templating\TagLib\System;
 
+use Lucinda\Templating\TagComment;
 use Lucinda\Templating\ViewCompilation;
 use Lucinda\Templating\File;
 use Lucinda\Templating\ViewException;
@@ -48,12 +49,13 @@ class ImportTag
         $subject = $file->getContents();
         $subject = $escaper->backup($subject);
         $this->viewCompilation->addComponent($path);
-        
-        return preg_replace_callback("/<import\s*(file\s*\=\s*\"(.*?)\")?\s*\/?>/", function ($matches) use ($escaper) {
+
+        $comment = new TagComment($path);
+        return $comment->start().preg_replace_callback("/<import\s*(file\s*\=\s*\"(.*?)\")?\s*\/?>/", function ($matches) use ($escaper) {
             if (empty($matches[2])) {
                 throw new ViewException("Tag 'import' requires attribute: file");
             }
             return $this->parse($matches[2], $escaper);
-        }, $subject);
+        }, $subject).$comment->end();
     }
 }

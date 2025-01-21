@@ -67,13 +67,29 @@ class Wrapper
         // compiles templates recursively into a single PHP file
         $vlp = new ViewLanguageParser($this->templatesFolder, $this->templatesExtension, $this->compilationsFolder, $this->tagLibFolder);
         $compilationFile = $vlp->compile($viewFile);
-        
+
         // compiles PHP file into HTML
-        ob_start();
-        require($compilationFile);
-        $output = ob_get_contents();
-        ob_end_clean();
-        
-        return $output;
+        return $this->bind($compilationFile, $data);
+    }
+
+    /**
+     * Binds compilation file to data, returning final HTML
+     *
+     * @param string $compilationFile
+     * @param array $data
+     * @return string
+     */
+    protected function bind(string $compilationFile, array $data): string
+    {
+        try {
+            ob_start();
+            include $compilationFile;
+            $output = ob_get_contents();
+        } finally {
+            ob_end_clean();
+        }
+
+        // removes comments, by default
+        return preg_replace("/<!-- VL:(START|END):\s*(.*?)\s*-->/", "", $output);
     }
 }
