@@ -1,8 +1,12 @@
 {
-    "name": "lucinda/view-language",
+    "name": "hlis/view-language",
     "type": "library",
     "description": "High performance templating API using tags & expressions inspired by Java JSTL and C Compiler",
-    "keywords": ["templating","views","jstl"],
+    "keywords": [
+        "templating",
+        "views",
+        "jstl"
+    ],
     "homepage": "http://www.lucinda-framework.com/view-language",
     "license": "MIT",
     "authors": [
