@@ -1,5 +1,5 @@
 {
-    "name": "hlis/view-language",
+    "name": "lucinda/view-language",
     "type": "library",
     "description": "High performance templating API using tags & expressions inspired by Java JSTL and C Compiler",
     "keywords": [
