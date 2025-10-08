@@ -1,5 +1,5 @@
 {
-    "name": "hlis/view-language",
+    "name": "lucinda/view-language",
     "type": "library",
     "description": "High performance view templating API  for PHP applications using tags & expressions inspired by Java JSTL and C Compiler",
     "keywords": [
@@ -14,7 +14,7 @@
         "ext-SimpleXML": "*"
     },
     "require-dev": {
-        "hlis/unit-testing": "^2.0"
+        "lucinda/unit-testing": "^2.0"
     },
     "autoload": {
         "psr-4": {
